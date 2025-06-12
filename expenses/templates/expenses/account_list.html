@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>My Accounts</h2>
+    <a href="{% url 'expenses:add_account' %}" class="btn btn-primary mb-3">Add New Account</a>
+    
+    <div class="row">
+        {% for detail in account_details %}
+        <div class="col-md-4 mb-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ detail.account.name }}</h5>
+                    <p class="card-text">
+                        <strong>Type:</strong> {{ detail.account.get_account_type_display }}<br>
+                        <strong>Balance:</strong> ${{ detail.total_balance|floatformat:2 }}
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'expenses:edit_account' detail.account.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'expenses:delete_account' detail.account.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col">
+            <p>No accounts found. Add your first account!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

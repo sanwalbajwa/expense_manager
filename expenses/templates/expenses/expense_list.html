@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/expense_list.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="expense-list-container">
+    <div class="expense-list-header">
+        <h2>Your Expenses</h2>
+        <a href="{% url 'expenses:add_expense' %}" class="add-expense-btn">Add New Expense</a>
+    </div>
+    
+    {% if expenses %}
+        <table class="expense-table">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Payment Method</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                <tr>
+                    <td>{{ expense.date }}</td>
+                    <td>{{ expense.currency }} {{ expense.amount|floatformat:2 }}</td>
+                    <td>{{ expense.category }}</td>
+                    <td>{{ expense.get_payment_method_display }}</td>
+                    <td>{{ expense.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No expenses recorded yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

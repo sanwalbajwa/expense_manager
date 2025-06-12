@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/create_category.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="category-create-container">
+    <h2>Create New Category</h2>
+    
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    
+    <form method="post" class="category-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Category Name</label>
+            <input 
+                type="text" 
+                class="form-control" 
+                id="name" 
+                name="name" 
+                placeholder="Enter category name" 
+                required
+                maxlength="100"
+            >
+        </div>
+        <div class="form-group">
+            <label for="description">Description (Optional)</label>
+            <textarea 
+                class="form-control" 
+                id="description" 
+                name="description" 
+                rows="3" 
+                placeholder="Enter category description"
+            ></textarea>
+        </div>
+        <button type="submit" class="btn-create-category">Create Category</button>
+    </form>
+</div>
+{% endblock %}

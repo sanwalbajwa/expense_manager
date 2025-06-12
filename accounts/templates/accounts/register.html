@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load socialaccount %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <div class="register-card">
+        <div class="login-header">
+            <h2>Create an Account</h2>
+            <p>Start tracking your expenses today</p>
+        </div>
+        
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.username.id_for_label }}">Username</label>
+                <input 
+                    type="{{ form.username.field.widget.input_type }}" 
+                    name="{{ form.username.name }}" 
+                    id="{{ form.username.id_for_label }}"
+                    required
+                    placeholder="Enter your username"
+                    class="{% if form.username.errors %}is-invalid{% endif %}"
+                >
+                {% if form.username.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.email.id_for_label }}">Email (Optional)</label>
+                <input 
+                    type="{{ form.email.field.widget.input_type }}" 
+                    name="{{ form.email.name }}" 
+                    id="{{ form.email.id_for_label }}"
+                    placeholder="Enter your email"
+                    class="{% if form.email.errors %}is-invalid{% endif %}"
+                >
+                {% if form.email.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.password1.id_for_label }}">Password</label>
+                <input 
+                    type="{{ form.password1.field.widget.input_type }}" 
+                    name="{{ form.password1.name }}" 
+                    id="{{ form.password1.id_for_label }}"
+                    required
+                    placeholder="Enter your password"
+                    class="{% if form.password1.errors %}is-invalid{% endif %}"
+                >
+                {% if form.password1.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="form-group">
+                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                <input 
+                    type="{{ form.password2.field.widget.input_type }}" 
+                    name="{{ form.password2.name }}" 
+                    id="{{ form.password2.id_for_label }}"
+                    required
+                    placeholder="Confirm your password"
+                    class="{% if form.password2.errors %}is-invalid{% endif %}"
+                >
+                {% if form.password2.errors %}
+                    <div class="invalid-feedback">
+                        {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            
+            <button type="submit" class="btn-login">Register</button>
+        </form>
+
+        <div class="social-login">
+            <div class="divider">
+                <span>or</span>
+            </div>
+            <a href="{% provider_login_url 'google' %}" class="btn-google">
+                <img src="{% static 'images/google-icon.svg' %}" alt="Google logo">
+                Sign up with Google
+            </a>
+        </div>
+        
+        <div class="login-footer">
+            <p>
+                Already have an account? 
+                <a href="{% url 'accounts:login' %}">Login</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

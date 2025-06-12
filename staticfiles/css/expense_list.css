@@ -1,0 +1,82 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --background-color: #f4f6f7;
+    --text-color: #2c3e50;
+    --card-background: #ffffff;
+}
+
+.expense-list-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.expense-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.expense-list-header h2 {
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.expense-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-background);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.expense-table thead {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.expense-table th,
+.expense-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.expense-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.add-expense-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: var(--secondary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.add-expense-btn:hover {
+    background-color: #27ae60;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.pagination a,
+.pagination span {
+    padding: 0.5rem 1rem;
+    margin: 0 0.25rem;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.pagination .current {
+    background-color: var(--primary-color);
+    color: white;
+}

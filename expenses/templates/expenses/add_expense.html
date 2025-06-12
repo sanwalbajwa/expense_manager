@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/add_expense.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Add New Expense</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="{% url 'expenses:create_category' %}" class="btn btn-secondary mb-3">Create New Category</a>
+        <button type="submit" class="btn btn-primary">Add Expense</button>
+    </form>
+</div>
+{% endblock %}

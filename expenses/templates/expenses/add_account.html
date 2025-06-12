@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/accounts.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Add New Account</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Account</button>
+    </form>
+</div>
+{% endblock %}

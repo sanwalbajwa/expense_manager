@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'css/allauth-google-login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="google-login-container">
+    <div class="google-login-card">
+        <div class="google-login-header">
+            <img src="{% static 'images/google-icon.svg' %}" alt="Google Logo" class="google-logo">
+            <h2>Sign in with Google</h2>
+        </div>
+        
+        <p class="login-description">
+            You are about to sign in to Expense Manager using your Google account.
+        </p>
+        
+        <form method="post">
+            {% csrf_token %}
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+            
+            <button type="submit" class="btn-google-login">
+                Continue with Google
+            </button>
+        </form>
+        
+        <div class="login-footer">
+            <p>
+                By continuing, you agree to the 
+                <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
