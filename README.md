@@ -13,6 +13,3 @@ A Django-based expense tracking application with Google OAuth login.
 ### Prerequisites
 - Python 3.10+
 - Django 5.x
-
-### Installation Steps
-1. Clone the repository
