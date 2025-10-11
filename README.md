@@ -5,7 +5,7 @@ A Django-based expense tracking application with Google OAuth login.
 
 ## Features
 - User authentication
-- Expense tracking
+- Expense tracking 
 - Google OAuth integration
 
 ## Setup and Installation
